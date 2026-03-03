@@ -1,7 +1,8 @@
--- @description Scratchy_SD - create region from time selection and 
+-- @description Scratchy_SD - create region from time selection and link to selected tracks in RRM
 -- @author Scratchy_SD
 -- @version 0.0.1
 
+-- get start and end positions for loop selection
 function getTimeSelectionBounds()
     local start_time_selection, end_time_selection = reaper.GetSet_LoopTimeRange(false, false, 0, 0, false)
     if start_time_selection ~= end_time_selection then
@@ -17,6 +18,7 @@ function createRegion(start_time_region, end_time_region)
     return reaper.AddProjectMarker(0, true, start_time_region, end_time_region, "", -1)
 end
 
+-- add region to RRM set to selected tracks
 function assignToRrmFromSelectedTracks(region_ID)
     local num_selected_tracks = reaper.CountSelectedTracks(0)
     if num_selected_tracks > 0 then
