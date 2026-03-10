@@ -2,6 +2,7 @@
 -- @author Scratchy_SD
 -- @version 0.0.1
 
+
 -- get start and end positions for loop selection
 function getTimeSelectionBounds()
     local start_time_selection, end_time_selection = reaper.GetSet_LoopTimeRange(false, false, 0, 0, false)
