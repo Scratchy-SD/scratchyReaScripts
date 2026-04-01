@@ -4,11 +4,8 @@ local cursor_position = reaper.GetCursorPosition()
 
 local selected_track_number = reaper.GetMediaTrackInfo_Value(selected_track, 'IP_TRACKNUMBER')
 
-reaper.InsertTrackInProject(0, selected_track_number, 0)
 
-local new_track = reaper.GetTrack(0, selected_track_number)
-
-local new_midi = reaper.CreateNewMIDIItemInProj( new_track, cursor_position, cursor_position + 0.25, false )
+local new_midi = reaper.CreateNewMIDIItemInProj( selected_track, cursor_position, cursor_position + 0.25, false )
 local take = reaper.GetActiveTake( new_midi )
 
 local vars = {}
@@ -22,5 +19,3 @@ local item_end = item_pos + item_len
 local start_ppq = reaper.MIDI_GetPPQPosFromProjTime( take, item_pos )
 local end_ppq = reaper.MIDI_GetPPQPosFromProjTime( take, item_end )
 reaper.MIDI_InsertNote( take, false, false, start_ppq, end_ppq, vars.chan, vars.pitch, vars.vel, false )
-
-reaper.CreateTrackSend(new_track, selected_track)
